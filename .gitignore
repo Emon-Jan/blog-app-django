@@ -20,6 +20,7 @@
 
 
 # misc
+/media
 /.sass-cache
 /connect.lock
 /coverage
