@@ -1,0 +1,41 @@
+{% extends "blogapp/base.html" %}
+<!-- -->
+{% block home %} active {% endblock %}
+<!-- -->
+{% block content %}
+<!-- -->
+<div class="row">
+    {% for post in post_list %}
+
+    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+            <a href="{% url 'post_detail' pk=post.pk %}">
+                {% if post.image %}
+                <img class="card-img-top" height="170px" src="{{ post.image.url }}" alt="{{ post.title }}"> {% else %}
+                <img class="card-img-top" height="170px" src="http://placehold.it/700x400" alt="{{ post.title }}">
+                <!-- -->
+                {% endif %}
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                </h4>
+                <p class="card-text">{{ post.text|safe|truncatechars:50 }}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <p>
+                        <span class="badge badge-dark">Published on: {{ post.published_date }}</span>
+                    </p>
+                    <p>
+                        <a href="{% url 'post_detail' pk=post.pk %}" class="badge badge-success">Comments: {{ post.approve_comments.count }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+<!-- -->
+{% endblock %}

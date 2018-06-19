@@ -1,0 +1,29 @@
+body {
+    padding-top: 54px;
+    min-height: 100vh;
+    height: 100%;
+  }
+
+  .navbar-brand{
+    font-family: 'Lobster', cursive !important;
+  }
+
+  footer.footer-font-style{
+    font-family: 'Lobster', cursive !important;
+  }
+  
+  @media (min-width: 992px) {
+    body {
+      padding-top: 56px;
+    }
+  }
+  
+  .portfolio-item {
+    margin-bottom: 30px;
+  }
+  
+  .pagination {
+    margin-bottom: 30px;
+  }
+
+  

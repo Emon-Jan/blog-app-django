@@ -1,0 +1,56 @@
+{% extends "blogapp/base.html" %}
+<!-- -->
+{% block home %}active{% endblock %}
+<!---->
+{% block content %}
+
+<div class="container">
+    <h1 class="my-4">
+        {{post.title}}
+        <!-- -->
+        {% if post.published_date %}
+        <small style="font-size: 15px">Published on: {{ post.published_date }}</small>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'publish_post' pk=post.pk %}"> Publish </a>
+        {% endif %}
+    </h1>
+    <!-- -->
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="post.title" width="300px" height="250px">
+    <!-- -->
+    {% endif %}
+    <p>{{ post.text|safe|linebreaksbr }}</p>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <a class="btn btn-info btn-sm" href="{% url 'post_edit' pk=post.pk %}"> Edit </a>
+    <a class="btn btn-danger btn-sm" href="{% url 'post_delete' pk=post.pk %}"> Delete </a>
+    {% endif %}
+
+    <hr>
+    <a class="btn btn-success float-right" href="{% url 'add_comment_to_post' pk=post.pk %}"> Add Comment </a>
+
+    {% for comment in post.comments.all %}
+    <!-- -->
+    {% if user.is_authenticated and user.is_superuser or comment.approved_comment %}
+    <p> {{comment.text|safe|linebreaksbr}} </p>
+    <p>Posted by: {{ comment.author }}</p>
+    <p>Posted on: {{ comment.created_date }}</p>
+    {% if not comment.approved_comment %}
+    <a class="btn btn-primary btn-sm" href="{% url 'comment_approval' pk=comment.pk %}"> Approve </a>
+    <a class="btn btn-default btn-sm" href="{% url 'comment_delete' pk=comment.pk %}"> Delete </a>
+    {% endif %}
+    <hr>
+    <!-- -->
+    {% endif %}
+    <!-- -->
+    {% empty %}
+    <p>No comments are made!</p>
+    <!-- -->
+    {% endfor %}
+</div>
+
+<!-- <div class="container">
+
+</div> -->
+<!-- -->
+{% endblock %}
