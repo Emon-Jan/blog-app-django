@@ -4,7 +4,17 @@ body {
     height: 100%;
   }
 
+  /*google font-family Anton|Josefin+Sans|Lobster|Noto+Serif */
+
+  .font-family-style{
+    font-family: 'Anton', cursive !important;
+  }
+
   .navbar-brand{
+    font-family: 'Lobster', cursive !important;
+  }
+
+  a.nav-link{
     font-family: 'Lobster', cursive !important;
   }
 

@@ -5,52 +5,60 @@
 {% block content %}
 
 <div class="container">
-    <h1 class="my-4">
-        {{post.title}}
-        <!-- -->
-        {% if post.published_date %}
-        <small style="font-size: 15px">Published on: {{ post.published_date }}</small>
-        {% else %}
-        <a class="btn btn-primary" href="{% url 'publish_post' pk=post.pk %}"> Publish </a>
-        {% endif %}
-    </h1>
-    <!-- -->
-    {% if post.image %}
-    <img src="{{ post.image.url }}" alt="post.title" width="300px" height="250px">
-    <!-- -->
-    {% endif %}
-    <p>{{ post.text|safe|linebreaksbr }}</p>
+    <div class="card">
+        <div class="card-body bg-light">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="my-2">
+                        {{post.title}}
+                    </h1>
+                    <!-- -->
+                    {% if post.published_date %}
+                    <small style="font-size: 15px">Published on: {{ post.published_date }}</small>
+                    {% else %}
+                    <a class="btn btn-primary" href="{% url 'publish_post' pk=post.pk %}"> Publish </a>
+                    {% endif %}
+                    <div class="row justify-content-center">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="post.title" class="img-responsive my-2" height="350px">
+                        <!-- -->
+                        {% endif %}
+                    </div>
+                    <p>{{ post.text|safe|linebreaksbr }}</p>
 
-    {% if user.is_authenticated and user.is_superuser %}
-    <a class="btn btn-info btn-sm" href="{% url 'post_edit' pk=post.pk %}"> Edit </a>
-    <a class="btn btn-danger btn-sm" href="{% url 'post_delete' pk=post.pk %}"> Delete </a>
-    {% endif %}
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <a class="btn btn-info btn-sm" href="{% url 'post_edit' pk=post.pk %}"> Edit </a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'post_delete' pk=post.pk %}"> Delete </a>
+                    {% endif %}
+                </div>
+            </div>
+            <hr class="bg-primary">
+            <a class="btn btn-success float-right" href="{% url 'add_comment_to_post' pk=post.pk %}"> Add Comment </a>
 
-    <hr>
-    <a class="btn btn-success float-right" href="{% url 'add_comment_to_post' pk=post.pk %}"> Add Comment </a>
-
-    {% for comment in post.comments.all %}
-    <!-- -->
-    {% if user.is_authenticated and user.is_superuser or comment.approved_comment %}
-    <p> {{comment.text|safe|linebreaksbr}} </p>
-    <p>Posted by: {{ comment.author }}</p>
-    <p>Posted on: {{ comment.created_date }}</p>
-    {% if not comment.approved_comment %}
-    <a class="btn btn-primary btn-sm" href="{% url 'comment_approval' pk=comment.pk %}"> Approve </a>
-    <a class="btn btn-default btn-sm" href="{% url 'comment_delete' pk=comment.pk %}"> Delete </a>
-    {% endif %}
-    <hr>
-    <!-- -->
-    {% endif %}
-    <!-- -->
-    {% empty %}
-    <p>No comments are made!</p>
-    <!-- -->
-    {% endfor %}
+            {% for comment in post.comments.all %}
+            <!-- -->
+            {% if user.is_authenticated and user.is_superuser or comment.approved_comment %}
+            <strong>
+                <p> {{comment.text|safe|linebreaksbr}} </p>
+            </strong>
+            <div style="font-size: 14px">
+                <p>Posted by: {{ comment.author }}</p>
+                <p>Posted on: {{ comment.created_date }}</p>
+            </div>
+            {% if not comment.approved_comment %}
+            <a class="btn btn-primary btn-sm" href="{% url 'comment_approval' pk=comment.pk %}"> Approve </a>
+            <a class="btn btn-default btn-sm" href="{% url 'comment_delete' pk=comment.pk %}"> Delete </a>
+            {% endif %}
+            <hr class="bg-secondary">
+            <!-- -->
+            {% endif %}
+            <!-- -->
+            {% empty %}
+            <p>No comments are made!</p>
+            <!-- -->
+            {% endfor %}
+        </div>
+    </div>
 </div>
-
-<!-- <div class="container">
-
-</div> -->
 <!-- -->
 {% endblock %}

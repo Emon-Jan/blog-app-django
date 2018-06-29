@@ -1,23 +1,34 @@
-{% extends "blogapp/base.html" %}
-{% load bootstrap4 %}
+{% extends "blogapp/base.html" %} {% load bootstrap4 %}
 <!-- -->
 {% block content %}
 <div class="container">
-    <h1 class="my-4">New Comment
-        <small>comment to this post!</small>
-    </h1>
+    <div class="jumbotron bg-dark text-white">
+        <div class="row justify-content-center" style="font-family: 'Anton', cursive;">
+            <h1>New Comment
+                <small style="font-size: 15px">comment to this post!</small>
+            </h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <hr class="bg-warning">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form method="POST">
+                    <!-- -->
+                    {% csrf_token %}
+                    <!-- -->
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-default">Post Comment</button>
+                </form>
 
-    <form method="POST">
-        <!-- -->
-        {% csrf_token %}
-        <!-- -->
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-default">Post Comment</button>
-    </form>
-
-    <script>
-        var editor = new MediumEditor('.editable');
-    </script>
+                <script>
+                    var editor = new MediumEditor('.editable');
+                </script>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- -->
 {% endblock %}

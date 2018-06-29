@@ -1,35 +1,7 @@
-<!-- {% extends "blogapp/base.html" %} -->
+{% extends "blogapp/base.html" %}
 <!---->
 {% block draft-list %}active{% endblock %}
 <!---->
 {% block content %}
 <!---->
-{{ posts }}
-<!--<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">-->
-
-<!--<div class="card h-100">-->
-<!--<a href="{% url 'post_detail' pk=post.pk %}">-->
-<!--{% if post.image %}-->
-<!--<img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">-->
-<!--&lt;!&ndash;&ndash;&gt;-->
-<!--{% endif %}-->
-<!--</a>-->
-<!--<div class="card-body">-->
-<!--<h4 class="card-title">-->
-<!--<a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>-->
-<!--</h4>-->
-<!--<p class="card-text">{{ post.text|truncatechars:180 }}</p>-->
-<!--</div>-->
-<!--<div class="card-footer">-->
-<!--<p>-->
-<!--<span class="badge badge-dark">Created on: {{ post.created_date }}</span>-->
-<!--</p>-->
-<!--<p>-->
-<!--<a href="{% url 'post_detail' pk=post.pk %}" class="badge badge-success">{{ post.approved_comments.count }}</a>-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!---->
-{% endblock %}
+{{ posts }} {% endblock %}

@@ -1,10 +1,14 @@
 {% extends 'base.html' %} {% load bootstrap4 %} {% block signup %}active{% endblock %} {% block content %}
 <div class="container">
-    <div class="jumbotron">
-        <div class="row justify-content-center">
+    <div class="jumbotron bg-dark text-white">
+        <div class="row justify-content-center" style="font-family: 'Anton', cursive;">
             <h2>Sign up</h2>
         </div>
-        <hr>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <hr class="bg-warning">
+            </div>
+        </div>
         <div class="row justify-content-center">
             {% if form.errors %}
             <p>Username and password didn't match!
@@ -18,7 +22,7 @@
                     {% csrf_token %}
                     <!-- -->
                     {% bootstrap_form form %}
-                    <input type="submit" class="btn btn-success float-right" value="Sign Up">
+                    <input type="submit" class="btn btn-success" value="Sign Up">
                 </form>
             </div>
         </div>

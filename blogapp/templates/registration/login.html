@@ -1,37 +1,44 @@
-{% extends 'blogapp/base.html' %}
-{% load bootstrap4 %}
+{% extends 'blogapp/base.html' %} {% load bootstrap4 %}
 <!---->
 {% block login %}active{% endblock %}
 <!---->
 {% block content %}
 <div class="container">
-    <div class="jumbotron">
-        <div class="row justify-content-center">
-            <h3>All CRUD operations are only authorized for superuser,</h3>
-            <h3>
-                <a href="/admin/"> please check with site admin</a>
-            </h3>
-        </div>
-
-        <div class="row justify-content-center">
-            <h3>Please Login or
-                <a href="{% url 'signup' %}">Signup</a>
-            </h3>
-        </div>
-        <hr>
-        <div class="row justify-content-center my-3">
-            {% if form.errors %}
-            <p>Username and password didn't match!</p>
-            <p>Please try again.</p>
-            {% endif %}
-            <div class="col-lg-5">
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %} {% bootstrap_form form %}
-                    <input type="submit" class="btn btn-success float-right" value="Login">
-                    <input type="hidden" name="next" value="{{next}}">
-                </form>
+    <div class="jumbotron bg-dark text-white">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row justify-content-center" style="font-family: 'Anton', cursive;">
+                    <h2>Login</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <hr class="bg-info my-2">
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+                    {% if form.errors %}
+                    <p>Username and password didn't match!</p>
+                    <p>Please try again.</p>
+                    {% endif %}
+                </div>
+                <div class="row justify-content-center my-3">
+                    <div class="col-lg-5">
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %} {% bootstrap_form form %}
+                            <input type="submit" class="btn btn-primary" value="Login">
+                            <input type="hidden" name="next" value="{{next}}">
+                            <a class="btn btn-warning mr-2" href="{% url 'signup' %}">Signup</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-justify" style="font-family: 'Anton', cursive;">
+                <p style="font-size: 28px">All CRUD operations are only authorized for superuser,
+                    <a href="/admin/"> please check with site admin</a>
+                </p>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
